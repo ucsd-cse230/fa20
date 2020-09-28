@@ -90,8 +90,18 @@ originally published by Lucas Gatsas.
 - [*] assignments.md
 - [*] lectures.md
 - [*] CANVAS
-- [ ] 00-lambda -- POST ON CANVAS
-- [ ] zoom/groups
+
+- [ ] 00-lambda 
+	- [ ] Gradesource / Github 
+	- [ ] POST ON CANVAS
+
+- [ ] groups
+	- [ ] create groups
+	- [ ] zoom breakout rooms
+
+- [ ] deploy voltron
+	- [ ] voltron groups
+
 
 ## Spring 2020
 
