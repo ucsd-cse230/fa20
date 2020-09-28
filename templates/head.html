@@ -58,12 +58,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
     <!-- Canonical -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseUrl | prepend: site.url }}">
     <!-- StyleSheet -->
-    <link rel="stylesheet" href="$baseUrl$/static/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="$baseUrl$/static/css/spaceg.stylesheets.css"> -->
-    <link rel="stylesheet" href="$baseUrl$/static/css/ronacher.css" type="text/css">
-
-    <link rel="stylesheet" href="$baseUrl$/static/css/syntax.css">
-    <link rel="stylesheet" href="$baseUrl$/static/css/liquid-light.css">
+    <link rel="stylesheet" href="$cssUrl$/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="$cssUrl$/static/css/ronacher.css" type="text/css">
+    <link rel="stylesheet" href="$cssUrl$/static/css/syntax.css">
+    <link rel="stylesheet" href="$cssUrl$/static/css/liquid-light.css">
 
     <!-- Fonts
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -85,7 +83,6 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 	ul, ol {margin-top: 0;margin-bottom: 10px;}
 	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
 </style>
-<!--link rel="stylesheet" href="$baseUrl$/static/css/prettify.css"-->
 <style>
   /* HEADER IMAGE */
   header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
