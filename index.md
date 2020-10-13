@@ -12,7 +12,7 @@ headerImg: angles.jpg
 ## Co-ordinates
 
 + *Lectures:* Tu-Th 9:30am to 10:50am
-+ *Location:* Zoom (see links on [CANVAS](https://canvas.ucsd.edu/courses/12823))
++ *Location:* Zoom (see links on [CANVAS](https://canvas.ucsd.edu/courses/18886))
 + *Messages:* [Piazza](https://piazza.com/class/kfn3pakx2el278)
 
 ## Description
