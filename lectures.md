@@ -17,7 +17,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/6*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                  | 
 | *10/8*     | ""                              |                           | [pdf][01-lambda-C]   |                  | 
 | *10/13*    | ""                              |                           | [pdf][01-lambda-D]   |                  | 
-| *10/15*     | Haskell Basics                 | [html][02-hs-basic]       |                      |                  |
+| *10/15*     | Haskell Basics                 | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15]                 |
 
 <!-- 
 | *4/3*      | ""                              |                           | [pdf][01-lambda-B]   |                  | 
@@ -70,8 +70,8 @@ Liquid    = 3
 [02-hs-basic]: lectures/02-haskell-basic.html
 [03-hs-types]: lectures/03-haskell-types.html
 [04-hs-io]: lectures/04-haskell-io.html
-[02-hs-basic-A]: static/raw/02-haskell-basics-A.pdf
-[lec_4_13]: static/raw/lec_4_13_20.hs
+[02-hs-basic-A]: static/raw/02-haskell-basic-A.pdf
+[lec_10_15]: static/raw/lec_10_15_20.hs
 [02-hs-basic-B]: static/raw/02-haskell-basics-B.pdf
 [lec_4_15]: static/raw/lec_4_15_20.hs
 [02-hs-basic-C]: static/raw/02-haskell-basics-C.pdf
