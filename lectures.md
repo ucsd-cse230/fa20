@@ -17,22 +17,14 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/6*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                  | 
 | *10/8*     | ""                              |                           | [pdf][01-lambda-C]   |                  | 
 | *10/13*    | ""                              |                           | [pdf][01-lambda-D]   |                  | 
-| *10/15*     | Haskell Basics                 | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15]                 |
+| *10/15*    | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15]|
+| *10/20*    | ""                              |                           | [pdf][02-hs-basic-B] | [code][lec_10_20]|
+|      | Haskell  Types                  | [html][03-hs-types]       | | |  
+|      | Polymorphism                    | [html][06-poly-data]      | | |
+|      | Higher Order Functions          | [html][07-patterns]       | | |
+|      | Haskell: IO                     | [html][04-hs-io]          | | |
 
 <!-- 
-| *4/3*      | ""                              |                           | [pdf][01-lambda-B]   |                  | 
-| *4/6*      | ""                              |                           | [pdf][01-lambda-C]   |                  | 
-| *4/8*      | ""                              |                           | [pdf][01-lambda-D]   |                  | 
-| *4/10*     | ""                              |                           | [pdf][01-lambda-E]   |                  | 
-| *4/13*     | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_4_13] |
-| *4/15*     | ""                              |                           | [pdf][02-hs-basic-B] | [code][lec_4_15] |
-| *4/20*     | ""                              |                           | [pdf][02-hs-basic-C] | [code][lec_4_20] |
-| *4/22*     | Haskell  Types                  | [html][03-hs-types]       | [pdf][03-hs-types-A] | [code][lec_4_22] |
-| *4/24*     | ""                              |                           | ""                   | [code][lec_4_24] |
-| *4/27*     | Polymorphism                    | [html][06-poly-data]      | [pdf][06-poly-A]     | [code][lec_4_27] | 
-| *4/29*     | Higher Order Functions          | [html][07-patterns]       | [pdf][07-bottling-A] | [code][lec_4_29] |
-| *5/1*      | ""                              |                           | [pdf][07-bottling-B] | [code][lec_5_1]  |
-| *5/4*      | Haskell: IO                     | [html][04-hs-io]          | [pdf][04-hs-io-A]    | [code][lec_5_4]  |
 | *5/6*      | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes-A]  | [code][lec_5_6]  |
 | *5/8*      | ""                              |                           | [pdf][08-classes-B]  | [code][lec_5_8]  |
 | *5/11*     | Functors & Monads               | [html][09-monads]         | [pdf][09-monads-A]   | [code][lec_5_11] | 
@@ -71,11 +63,12 @@ Liquid    = 3
 [03-hs-types]: lectures/03-haskell-types.html
 [04-hs-io]: lectures/04-haskell-io.html
 [02-hs-basic-A]: static/raw/02-haskell-basic-A.pdf
-[lec_10_15]: static/raw/lec_10_15_20.hs
-[02-hs-basic-B]: static/raw/02-haskell-basics-B.pdf
-[lec_4_15]: static/raw/lec_4_15_20.hs
-[02-hs-basic-C]: static/raw/02-haskell-basics-C.pdf
-[lec_4_20]: static/raw/lec_4_20_20.hs
+[02-hs-basic-B]: static/raw/02-haskell-basic-B.pdf
+[lec_10_15]: static/code/src/lec_10_15_20.hs
+[lec_10_20]: static/code/src/lec_10_20_20.hs
+
+
+
 [03-hs-types-A]: static/raw/03-hs-types-A.pdf
 [lec_4_22]: static/raw/lec_4_22_20.hs
 [03-hs-types-B]: static/raw/03-hs-types-A.pdf
