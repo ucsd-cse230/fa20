@@ -11,18 +11,18 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 
 ## Topics, Notes and Code
 
-| **Date**   | **Topic**                       | **Notes**                 | **Markup**           | **Code**         |
-|:----------:|:--------------------------------|:--------------------------|:---------------------|:-----------------|
-| *10/1*     | Intro                           | [pdf][00-intro]           | [pdf][01-lambda-A]   |                  | 
-| *10/6*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                  | 
-| *10/8*     | ""                              |                           | [pdf][01-lambda-C]   |                  | 
-| *10/13*    | ""                              |                           | [pdf][01-lambda-D]   |                  | 
-| *10/15*    | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15]|
-| *10/20*    | ""                              |                           | [pdf][02-hs-basic-B] | [code][lec_10_20]|
-|      | Haskell  Types                  | [html][03-hs-types]       | | |  
-|      | Polymorphism                    | [html][06-poly-data]      | | |
-|      | Higher Order Functions          | [html][07-patterns]       | | |
-|      | Haskell: IO                     | [html][04-hs-io]          | | |
+| **Date**   | **Topic**                       | **Notes**                 | **Markup**           | **Code**          |
+|:----------:|:--------------------------------|:--------------------------|:---------------------|:------------------|
+| *10/1*     | Intro                           | [pdf][00-intro]           | [pdf][01-lambda-A]   |                   | 
+| *10/6*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                   | 
+| *10/8*     | ""                              |                           | [pdf][01-lambda-C]   |                   | 
+| *10/13*    | ""                              |                           | [pdf][01-lambda-D]   |                   | 
+| *10/15*    | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15] |
+| *10/20*    | ""                              |                           | [pdf][02-hs-basic-B] | [code][lec_10_20] |
+| *10/22*    | Haskell  Types                  | [html][03-hs-types]       | [pdf][03-hs-types-A] | [code][lec_10_22] |  
+| *10/27*    | Polymorphism & HOFs             | [html][06-poly-data]      | [pdf][06-poly-hof]   | [code][lec_10_27] |
+|            |                                 | [html][07-patterns]       |                      |                   |
+| *10/29*    | Haskell: IO                     | [html][04-hs-io]          |                      |                   |
 
 <!-- 
 | *5/6*      | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes-A]  | [code][lec_5_6]  |
@@ -66,36 +66,21 @@ Liquid    = 3
 [02-hs-basic-B]: static/raw/02-haskell-basic-B.pdf
 [lec_10_15]: static/code/src/lec_10_15_20.hs
 [lec_10_20]: static/code/src/lec_10_20_20.hs
-
-
-
+[lec_10_22]: static/code/src/lec_10_22_20.hs
 [03-hs-types-A]: static/raw/03-hs-types-A.pdf
-[lec_4_22]: static/raw/lec_4_22_20.hs
 [03-hs-types-B]: static/raw/03-hs-types-A.pdf
-[lec_4_24]: static/raw/lec_4_24_20.hs
 [06-poly-data]: lectures/06-poly-data.html    
-[06-poly-A]: static/raw/06-poly-data.pdf
-[lec_4_27]: static/raw/lec_4_27_20.hs
-[07-bottling-A]: static/raw/07-bottling-A.pdf
-[lec_4_29]: static/raw/lec_4_29_20.hs
-[07-bottling-B]: static/raw/07-bottling-B.pdf
-[lec_5_1]: static/raw/lec_5_1_20.hs
+[06-poly-hof]: static/raw/06-poly-hof.pdf
+[lec_10_27]: static/code/src/lec_10_27_20.hs
+
 [04-hs-io-A]: static/raw/04-hs-io-A.pdf
-[lec_5_4]: static/raw/lec_5_4_20.hs
 
 [08-classes-A]: static/raw/08-typeclasses-A.pdf
-[lec_5_6]: static/raw/lec_5_6_20.hs
 [08-classes-B]: static/raw/08-typeclasses-A.pdf
-[lec_5_8]: static/raw/lec_5_8_20.hs
 [09-monads-A]: static/raw/09-monads-A.pdf
-[lec_5_11]: static/raw/lec_5_11_20.hs
 [11-state-A]: static/raw/11-state-A.pdf
 [11-state-B]: static/raw/11-state-B.pdf
 [11-state-C]: static/raw/11-state-C.pdf
-[lec_5_13]: static/raw/lec_5_13_20.hs
-[lec_5_15]: static/raw/lec_5_15_20.hs
-[lec_5_18]: static/raw/lec_5_18_20.hs
-[lec_5_20]: static/raw/lec_5_20_20.hs
 
 [12-parsers-A]: static/raw/12-parsers-A.pdf
 [12-parsers-B]: static/raw/12-parsers-B.pdf
