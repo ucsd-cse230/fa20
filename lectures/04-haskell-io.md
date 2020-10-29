@@ -361,7 +361,7 @@ main = do { putStrLn "Hello!";
 
 Write a function called `sequence` that 
 
-* Takes a _list_ of recipes `[r1,...,rn]` as input and
+* Takes a _non-empty list_ of recipes `[r1,...,rn]` as input and
 * Returns a _single_ recipe equivalent to `do {r1; ...; rn}`
 
 ```haskell

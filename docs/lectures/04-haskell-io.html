@@ -383,7 +383,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="exercise-combining-many-recipes">EXERCISE: Combining Many Recipes</h2>
 <p>Write a function called <code class="sourceCode haskell"><span class="fu">sequence</span></code> that</p>
 <ul>
-<li>Takes a <em>list</em> of recipes <code class="sourceCode haskell">[r1,<span class="op">...</span>,rn]</code> as input and</li>
+<li>Takes a <em>non-empty list</em> of recipes <code class="sourceCode haskell">[r1,<span class="op">...</span>,rn]</code> as input and</li>
 <li>Returns a <em>single</em> recipe equivalent to <code class="sourceCode haskell"><span class="kw">do</span> {r1; <span class="op">...</span>; rn}</code></li>
 </ul>
 <div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="fu">sequence</span><span class="ot"> ::</span> [<span class="dt">Recipe</span> a] <span class="ot">-&gt;</span> <span class="dt">Recipe</span> a</span>
