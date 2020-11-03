@@ -22,7 +22,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/22*    | Haskell  Types                  | [html][03-hs-types]       | [pdf][03-hs-types-A] | [code][lec_10_22] |  
 | *10/27*    | Polymorphism & HOFs             | [html][06-poly-data]      | [pdf][06-poly-hof]   | [code][lec_10_27] |
 | *10/29*    | ""                              | [html][07-patterns]       | [pdf][07-hofs]       | [code][lec_10_29] |
-| *11/3*     | Haskell: IO                     | [html][04-hs-io]          |                      |                   |
+| *11/3*     | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][lec_11_3]  |
 
 <!-- 
 | *5/6*      | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes-A]  | [code][lec_5_6]  |
@@ -74,6 +74,7 @@ Liquid    = 3
 [07-hofs]: static/raw/07-hofs.pdf
 [lec_10_27]: static/code/src/lec_10_27_20.hs
 [lec_10_29]: static/code/src/lec_10_29_20.hs
+[lec_11_3]: static/code/src/lec_11_3_20.hs
 
 [04-hs-io-A]: static/raw/04-hs-io-A.pdf
 
