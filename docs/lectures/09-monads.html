@@ -233,10 +233,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<h2 id="abstracting-code-patterns">Abstracting Code Patterns</h2>
 <p>a.k.a. <strong>Dont Repeat Yourself</strong></p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="lists">Lists</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">List</span> a</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="ot">=</span> []</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  <span class="op">|</span> (<span class="op">:</span>) a (<span class="dt">List</span> a)</span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="rendering-the-values-of-a-list">Rendering the Values of a List</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; incList [1, 2, 3]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">-- [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</span></span>
@@ -244,6 +246,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="fu">showList</span><span class="ot">        ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">String</span>]</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="fu">showList</span> []     <span class="ot">=</span>  []</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="fu">showList</span> (n<span class="op">:</span>ns) <span class="ot">=</span>  <span class="fu">show</span> n <span class="op">:</span> <span class="fu">showList</span> ns</span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="squaring-the-values-of-a-list">Squaring the values of a list</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; sqrList [1, 2, 3]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">-- 1, 4, 9</span></span>
@@ -267,6 +270,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Tree</span> a</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="ot">=</span> <span class="dt">Leaf</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Node</span> a (<span class="dt">Tree</span> a) (<span class="dt">Tree</span> a)</span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="incrementing-the-values-of-a-tree">Incrementing the values of a Tree</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; showTree (Node 2 (Node 1 Leaf Leaf) (Node 3 Leaf Leaf))</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="co">-- (Node &quot;2&quot; (Node &quot;1&quot; Leaf Leaf) (Node &quot;3&quot; Leaf Leaf))</span></span>
@@ -274,6 +278,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="ot">showTree ::</span> <span class="dt">Tree</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Tree</span> <span class="dt">String</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>showTree <span class="dt">Leaf</span>         <span class="ot">=</span> <span class="op">???</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>showTree (<span class="dt">Node</span> v l r) <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h3 id="squaring-the-values-of-a-tree">Squaring the values of a Tree</h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; sqrTree (Node 2 (Node 1 Leaf Leaf) (Node 3 Leaf Leaf))</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="co">-- (Node 4 (Node 1 Leaf Leaf) (Node 9 Leaf Leaf))</span></span>
@@ -327,6 +332,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; fmap show [1,2,3]</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a><span class="co">-- [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</span></span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="a-type-to-represent-expressions">A Type to Represent Expressions</h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Expr</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>  <span class="ot">=</span> <span class="dt">Number</span> <span class="dt">Int</span>            <span class="co">-- ^ 0,1,2,3,4</span></span>
@@ -355,10 +361,15 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a><span class="co">-- 30 </span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; eval e4</span></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a><span class="co">-- 10</span></span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="quiz-1">QUIZ</h2>
 <p>What does the following evaluate to?</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>quiz <span class="ot">=</span> eval (<span class="dt">Div</span> (<span class="dt">Number</span> <span class="dv">60</span>) (<span class="dt">Minus</span> (<span class="dt">Number</span> <span class="dv">5</span>) (<span class="dt">Number</span> <span class="dv">5</span>)))</span></code></pre></div>
-<p><strong>A.</strong> <code class="sourceCode haskell"><span class="dv">0</span></code> <strong>B.</strong> <code class="sourceCode haskell"><span class="dv">1</span></code> <strong>C.</strong> Type error <strong>D.</strong> Runtime exception <strong>E.</strong> <code class="sourceCode haskell"><span class="dt">NaN</span></code></p>
+<p><strong>A.</strong> <code class="sourceCode haskell"><span class="dv">0</span></code></p>
+<p><strong>B.</strong> <code class="sourceCode haskell"><span class="dv">1</span></code></p>
+<p><strong>C.</strong> Type error</p>
+<p><strong>D.</strong> Runtime exception</p>
+<p><strong>E.</strong> <code class="sourceCode haskell"><span class="dt">NaN</span></code></p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="to-avoid-crash-return-a-result">To avoid crash, return a <code class="sourceCode haskell"><span class="dt">Result</span></code></h2>
 <p>Lets make a data type that represents <code class="sourceCode haskell"><span class="dt">Ok</span></code> or <code class="sourceCode haskell"><span class="dt">Error</span></code></p>
@@ -366,6 +377,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>  <span class="ot">=</span> <span class="dt">Ok</span>   v       <span class="co">-- ^ a &quot;successful&quot; result with value `v`</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>  <span class="op">|</span> <span class="dt">Error</span> <span class="dt">String</span> <span class="co">-- ^ something went &quot;wrong&quot; with `message`</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Show</span>)</span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="exercise">EXERCISE</h2>
 <p>Can you implement a <code class="sourceCode haskell"><span class="dt">Functor</span></code> instance for <code class="sourceCode haskell"><span class="dt">Result</span></code>?</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">Functor</span> <span class="dt">Result</span> <span class="kw">where</span></span>
@@ -377,6 +389,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a><span class="co">-- &gt;&gt;&gt; fmap (\n -&gt; n ^ 2) (Error &quot;oh no&quot;) </span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a><span class="co">-- Error &quot;oh no&quot;</span></span></code></pre></div>
+<p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="evaluating-without-crashing">Evaluating without Crashing</h2>
 <p>Instead of <em>crashing</em> we can make our <code class="sourceCode haskell">eval</code> return a <code class="sourceCode haskell"><span class="dt">Result</span> <span class="dt">Int</span></code></p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="ot">eval ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Result</span> <span class="dt">Int</span></span></code></pre></div>

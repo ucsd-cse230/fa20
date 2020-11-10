@@ -8,6 +8,16 @@ headerImg: books.jpg
 
 a.k.a. **Dont Repeat Yourself**
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 ### Lists
 
 ```haskell
@@ -15,6 +25,17 @@ data List a
   = []
   | (:) a (List a)
 ```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 
 ### Rendering the Values of a List
 
@@ -26,6 +47,17 @@ showList        :: [Int] -> [String]
 showList []     =  []
 showList (n:ns) =  show n : showList ns
 ```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 
 ### Squaring the values of a list
 
@@ -87,6 +119,17 @@ data Tree a
   | Node a (Tree a) (Tree a)
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 ### Incrementing the values of a Tree 
 
 
@@ -98,6 +141,17 @@ showTree :: Tree Int -> Tree String
 showTree Leaf         = ???
 showTree (Node v l r) = ???
 ```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 
 ### Squaring the values of a Tree
 
@@ -221,6 +275,17 @@ And now we can do
 -- ["1", "2", "3"]
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 ## A Type to Represent Expressions
 
 ```haskell
@@ -281,6 +346,17 @@ so that when you're done we get
 -- 10
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 ## QUIZ
 
 What does the following evaluate to?
@@ -290,9 +366,13 @@ quiz = eval (Div (Number 60) (Minus (Number 5) (Number 5)))
 ```
 
 **A.** `0`
+
 **B.** `1`
+
 **C.** Type error
+
 **D.** Runtime exception
+
 **E.** `NaN`
 
 <br>
@@ -319,6 +399,19 @@ data Result v
   deriving (Eq, Show)
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
 ## EXERCISE 
 
 Can you implement a `Functor` instance for `Result`?
@@ -338,6 +431,19 @@ When you're done you should see
 -- >>> fmap (\n -> n ^ 2) (Error "oh no") 
 -- Error "oh no"
 ```
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 
 ## Evaluating without Crashing 
 
