@@ -1,187 +1,176 @@
-module Lec_11_11_20 where
+{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE OverlappingInstances #-}
+
+module Lec_11_5_20 where
 
 import Debug.Trace
 
 -- >>> 2.1 + 3.2
 -- 5.300000000000001
 
--- >>> True + True
--- No instance for (Num Bool) arising from a use of ‘+’
+data JVal
+  = JStr  String
+  | JNum  Double
+  | JBool Bool
+  | JObj  [(String, JVal)]
+  | JArr  [JVal]
+  deriving (Eq, Ord, Show)
 
+js1 :: JVal
+js1 =
+  JObj [("name", JStr "Ranjit")
+       ,("age",  JNum 41.0)
+       ,("likes",   JArr [ JStr "guacamole", JStr "coffee", JStr "bacon"])
+       ,("hates",   JArr [ JStr "waiting"  , JStr "grapefruit"])
+       ,("lunches", JArr [ JObj [("day",  JStr "monday")
+                                ,("loc",  JStr "zanzibar")]
+                         , JObj [("day",  JStr "tuesday")
+                                ,("loc",  JStr "farmers market")]
+                         , JObj [("day",  JStr "wednesday")
+                                ,("loc",  JStr "hare krishna")]
+                         , JObj [("day",  JStr "thursday")
+                                ,("loc",  JStr "faculty club")]
+                         , JObj [("day",  JStr "friday")
+                                ,("loc",  JStr "coffee cart")]
+                         ])
+       ]
 
-half :: Int -> Int
-half x = x `div` 2
 
+{-
+  Double -> JVal
+  Bool  -> JVal
+  String -> JVal
 
-foo :: (Eq a) => a -> a -> Bool
-foo x y = x == y
+  class ToJVal a where
+    toJVal :: a -> JVal
 
--- >>> :type (+)
--- (+) :: forall a. (Num a) => a -> a -> a
 
--- <A implements Num> A add(A x, A y)
+ -}
 
--- >>> False / True
--- No instance for (Fractional Bool) arising from a use of ‘/’
 
-instance Num Bool where
-    (+) x y = x || y
-    (*) x y = x && y
-    negate x = not x
-    fromInteger 0 = False
-    fromInteger _ = True
 
--- True + False 
+instance ToJVal Double where
+  toJVal d = JNum d
 
--- True.add(False)
+instance ToJVal String where
+  toJVal s = JStr s
 
--- >>> ("dab", 10) < ("cat", 2)
--- False
+instance ToJVal Bool where
+  toJVal s = JBool s
 
--- >>> "apple" < "app"
--- False
+instance (ToJVal a) => ToJVal [a] where
+  toJVal xs = JArr (map toJVal xs)
 
 
--- >>> show 2
--- "2"
 
+class ToJVal a where
+  toJVal :: a -> JVal 
 
--- >>> show (1,2,"cat")
--- "(1,2,\"cat\")"
+instance ToJVal a => ToJVal [(String, a)] where
+  toJVal kvs = JObj (map (\(k, v) -> (k, toJVal v)) kvs)
 
+-- >>> toJVal [("mon", 0.0 :: Double), ("tue", 1)]
+-- JObj [("mon",JNum 0.0),("tue",JNum 1.0)]
 
--- >>> :t show
--- show :: forall a. Show a => a -> String
 
+-- >>> toJVal ([1.0, 2.1, 3.2] :: [Double])
+-- JArr [JNum 1.0,JNum 2.1,JNum 3.2]
+-- >>> toJVal [["cat", "dog"], ["horse"], []]
+-- JArr [JArr [JStr "cat",JStr "dog"],JArr [JStr "horse"],JArr []]
 
-thingA :: Unshowable
-thingA = A
 
-thingB :: Unshowable
-thingB = B
 
-things :: [Unshowable]
-things = [thingA, thingB]
 
--- >>> [[thingA, thingB], [C]]
--- [[A,B],[C]]
 
+data Table k v 
+  = Def v 
+  | Bind k v (Table k v)
+  deriving (Show, Functor)
 
--- instance Show Unshowable where
---     show x  = showU x
+instance ToJVal v => ToJVal (Table String v) where 
+  toJVal :: Table String v -> JVal
+  toJVal env = JObj (conv env)
+  -- toJVal (Def v) = JObj [("def", toJVal v)]
+  -- toJVal (Bind k v rest) = JObj [ (k, toJVal v) , ("rest", toJVal rest) ]
 
--- showU :: Unshowable -> String
--- showU A = "A"
--- showU B = "B"
--- showU C = "C"
+conv :: (ToJVal v) => Table String v -> [(String, JVal)]
+conv env = case env of
+  Def v         -> [("def", toJVal v)]
+  Bind k v rest -> (k, toJVal v) : conv rest
 
-data Unshowable = A | B | C 
-                  deriving (Eq, Ord, Show)
+table :: Table String Double
+table = Bind "cat" 10.0 (Bind "dog" 20.0 (Def 0))
 
----------
-data Hard = H Int deriving (Eq)
----------
+-- >>> fmap (\p -> p * 100) table
+-- No instance for (Show (Table String Double))
+--   arising from a use of ‘ghcideCustomShow’
 
--- >>> A <= A 
--- True
 
+-- >>> toJVal table 
+-- JObj [("cat",JNum 10.0),("dog",JNum 20.0),("def",JNum 0.0)]
 
-data Table k v
-  = Def  v                -- default value `v` to be used for "missing" keys
-  | Bind k v (Table k v)  -- bind key `k` to the value `v`
-  deriving (Show)
+-- >>> toJVal table 
+-- JObj [("cat",JNum 10.0),("rest",JObj [("dog",JNum 20.0),("rest",JObj [("def",JNum 0.0)])])]
 
-data Day = Tue | Wed | Thu | Fri deriving (Eq) 
 
-table2 :: Table Day Int
-table2 = Bind Tue 4 
-            (Bind Wed 5 
-                (Bind Thu 6 
-                    (Bind Fri 7 
-                        (Def 0))))
+-- JObj [ ("cat", JNum 10.0)
+--      , ("dog", JNum 20.0)
+--      , ("def", JNum 0.0)
+--      ]
 
--- >>> get Fri table2
--- 7
 
-table1 :: Table String Int
-table1 = Bind "Tue" 4 
-            (Bind "Wed" 5 
-                (Bind "Thu" 6 
-                    (Bind "Fri" 7 
-                        (Def 0))))
+data Tree a = Leaf | Node a (Tree a) (Tree a)
+  deriving (Eq, Ord, Show, Functor)
 
--- >>> table1
--- Bind "Tue" 4 (Bind "Wed" 5 (Bind "Thu" 6 (Bind "Fri" 7 (Def 0))))
+tr0 :: Tree Int
+tr0 = Node 5 
+        (Node 2 Leaf Leaf) 
+        (Node 7 Leaf Leaf)
 
-set :: key -> value -> Table key value -> Table key value
-set k v t = Bind k v t
+-- >>> fmap (\n -> n + 1) tr0
+-- Node 6 (Node 3 Leaf Leaf) (Node 8 Leaf Leaf)
 
--- >>> get "Thu" table1
--- 6
 
--- >>> get "Fri" table1
--- 7
+incTree :: Tree Int -> Tree Int
+incTree Leaf = Leaf
+incTree (Node n l r) = Node (n + 1) (incTree l) (incTree r)
 
--- >>> get "Sun" table1
--- 0
+sqrTree :: Tree Int -> Tree Int
+sqrTree Leaf = Leaf
+sqrTree (Node n l r) = Node (n * n) (sqrTree l) (sqrTree r)
 
+instance Mappable [] where
+  gmap f []     = []
+  gmap f (x:xs) = f x : (gmap f xs)
 
--- get :: key -> Table key value -> value
+instance Mappable Tree where
+  gmap f Leaf         = Leaf
+  gmap f (Node n l r) = Node (f n) (gmap f l) (gmap f r)
 
--- get :: Eq k => k -> Table k v -> v
-get :: (Eq t, Show t, Show p) => t -> Table t p -> p
-get key t@(Bind k v rest) 
-  | key == k    = v 
-  | otherwise   = trace ("t = " ++ show t) (get key rest)
-get key (Def v) = v 
+class Mappable t where
+  gmap :: (a -> b) -> t a -> t b
 
--- >>> :t trace
--- trace :: forall a. String -> a -> a
+incThings :: (Functor t) => t Int -> t Int
+incThings = fmap (\n -> n + 1)
 
---------
--- get/set
--- 
---------
+sqrThings :: (Functor t) => t Int -> t Int
+sqrThings = fmap (\n -> n * n)
 
+showThings :: (Functor t, Show a) => t a -> t String
+showThings = fmap (\x -> show x)
 
 
 
 
+-- >>> sqrThings [1,2,3,4]
+-- [1,4,9,16]
 
+{- 
+    5 
+  2   7
+L L   L L
 
-
-
-quiz = A <= A 
-
-
-
--- eqU :: Unshowable -> Unshowable -> Bool
--- eqU A A = True 
--- eqU B B = True 
--- eqU C C = True 
--- eqU _ _ = False
-
-
--- instance Eq Unshowable where
---     (==) = eqU
-
-
-
--- (A) True
--- (B) False 
--- (C) Run-time ERROR
--- (D) Compile Time ERROR
--- (E) 2
-
-
-
-
-
-
-
-
-
-myCompare :: Ord a => a -> a -> Bool
-myCompare x y = x < y
-
--- >>> A < B
+-}

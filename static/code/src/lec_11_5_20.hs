@@ -1,4 +1,4 @@
-module Lec_11_5_20 where
+module Lec_11_11_20 where
 
 import Debug.Trace
 
