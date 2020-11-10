@@ -24,10 +24,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/29*    | ""                              | [html][07-patterns]       | [pdf][07-hofs]       | [code][lec_10_29] |
 | *11/3*     | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][lec_11_3]  |
 | *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][lec_11_5]  |
+| *11/10*    | Functors & Monads               | [html][09-monads]         | [pdf][09-monads]     | [code][lec_11_10] | 
 
 <!-- 
 | *5/8*      | ""                              |                           | [pdf][08-classes-B]  | [code][lec_5_8]  |
-| *5/11*     | Functors & Monads               | [html][09-monads]         | [pdf][09-monads-A]   | [code][lec_5_11] | 
 | *5/13*     | ""                              |                           |                      | [code][lec_5_13] |
 | *5/15*     | State Transformers              | [html][11-state]          | [pdf][11-state-A]    | [code][lec_5_15] |
 | *5/18*     | ""		                       |                           | [pdf][11-state-C]    | [code][lec_5_18] |
@@ -43,12 +43,6 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 |            | Refinement Types                |                           |                      |                  |          
 |            | Proofs as Programs              |                           |                      |                  | 
 
-TC+monoid = 2
-Func+App  = 2
-Monad     = 3
-Parse     = 2
-QC        = 1
-Liquid    = 3
 -->
 
 [00-intro]: static/raw/lec-intro.pdf
