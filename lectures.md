@@ -26,6 +26,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][lec_11_5]  |
 | *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][lec_11_10] | 
 | *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][lec_11_12] | 
+| *11/17*    | State Transformers              | [html][11-state]          |     		  |                   |
 
 <!-- 
 | *5/8*      | ""                              |                           | [pdf][08-classes-B]  | [code][lec_5_8]  |
@@ -76,6 +77,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 
 [08-classes]: static/raw/08-typeclasses.pdf
 [09-functors]: static/raw/09-functors.pdf
+[10-monads]: static/raw/10-monads-maybe.pdf
 [11-state-A]: static/raw/11-state-A.pdf
 [11-state-B]: static/raw/11-state-B.pdf
 [11-state-C]: static/raw/11-state-C.pdf
