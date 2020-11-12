@@ -24,7 +24,8 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/29*    | ""                              | [html][07-patterns]       | [pdf][07-hofs]       | [code][lec_10_29] |
 | *11/3*     | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][lec_11_3]  |
 | *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][lec_11_5]  |
-| *11/10*    | Functors & Monads               | [html][09-monads]         | [pdf][09-functors]   | [code][lec_11_10] | 
+| *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][lec_11_10] | 
+| *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][lec_11_12] | 
 
 <!-- 
 | *5/8*      | ""                              |                           | [pdf][08-classes-B]  | [code][lec_5_8]  |
