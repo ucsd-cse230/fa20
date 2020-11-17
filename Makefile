@@ -4,7 +4,7 @@ site:
 
 upload:
 	cp -r _site/* docs/ 
-	cp -r static/code docs/
+	cp -r static/code/src docs/code/
 	cd docs/ && git add . && git commit -a -m "update page" && git push origin master 
 
 clean:
