@@ -430,16 +430,16 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="ot">next ::</span> <span class="dt">ST</span> <span class="dt">String</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a>next <span class="ot">=</span> <span class="dt">STC</span> (\s <span class="ot">-&gt;</span> (s<span class="op">+</span><span class="dv">1</span>, <span class="fu">show</span> s))</span></code></pre></div>
 <p>Now suppose we have</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>wtf1 <span class="ot">=</span> <span class="dt">ST</span> <span class="dt">Int</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>wtf1 <span class="ot">=</span> <span class="dt">ST</span> <span class="dt">String</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>wtf1 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n <span class="ot">-&gt;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>         <span class="fu">return</span> n</span></code></pre></div>
 <p>What does <code class="sourceCode haskell">quiz</code> evaluate to?</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState <span class="dv">100</span> wtf1</span></code></pre></div>
-<p><strong>A.</strong> <code class="sourceCode haskell"><span class="dv">100</span></code></p>
-<p><strong>B.</strong> <code class="sourceCode haskell"><span class="dv">101</span></code></p>
-<p><strong>C.</strong> <code class="sourceCode haskell"><span class="dv">0</span></code></p>
-<p><strong>D.</strong> <code class="sourceCode haskell"><span class="dv">1</span></code></p>
-<p><strong>E.</strong> <code class="sourceCode haskell">(<span class="dv">101</span>, <span class="dv">100</span>)</code></p>
+<p><strong>A.</strong> <code class="sourceCode haskell"><span class="st">&quot;100&quot;</span></code></p>
+<p><strong>B.</strong> <code class="sourceCode haskell"><span class="st">&quot;101&quot;</span></code></p>
+<p><strong>C.</strong> <code class="sourceCode haskell"><span class="st">&quot;0&quot;</span></code></p>
+<p><strong>D.</strong> <code class="sourceCode haskell"><span class="st">&quot;1&quot;</span></code></p>
+<p><strong>E.</strong> <code class="sourceCode haskell">(<span class="dv">101</span>, <span class="st">&quot;100&quot;</span>)</code></p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="example">Example</h2>
 <p><img src="../static/img/bind-1.png" /></p>
@@ -456,10 +456,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>What does <code class="sourceCode haskell">quiz</code> evaluate to?</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState <span class="dv">100</span> wtf</span></code></pre></div>
 <p><strong>A.</strong> Type Error!</p>
-<p><strong>B.</strong> [100, 100, 100]</p>
-<p><strong>C.</strong> [0, 0, 0]</p>
-<p><strong>D.</strong> [100, 101, 102]</p>
-<p><strong>E.</strong> [102, 102, 102]</p>
+<p><strong>B.</strong> [“100”, “100”, “100”]</p>
+<p><strong>C.</strong> [“0”, “0”, “0”]</p>
+<p><strong>D.</strong> [“100”, “101”, “102”]</p>
+<p><strong>E.</strong> [“102”, “102”, “102”]</p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="chaining-transformers">Chaining Transformers</h2>
 <p><code class="sourceCode haskell"><span class="op">&gt;&gt;=</span></code> lets us <em>chain</em> transformers into <em>one</em> big transformer!</p>
