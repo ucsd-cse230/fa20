@@ -28,6 +28,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][code]      | 
 | *11/17*    | State Transformers              | [html][11-state]          |     		              | [code][code]      |
 | *11/19*    | Parser Combinators              | [html][12-parsers]        |     		              | [code][code]      |
+|            | Exceptions                      | [html][13-transformers]   |                      |                   | 
+|            | Monad Transformers              | [html][13-transformers]   |                      |                   | 
+|            | Property-based Testing          | [html][14-testing]        |                      |                   | 
+
 
 <!-- 
 | *5/22*     | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][lec_5_22] |
@@ -36,6 +40,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *6/1*      | Exceptions                      | [html][13-transformers]   | [pdf][13-trans-A]    | [code][lec_6_1]  | 
 | *6/3*      | Monad Transformers              | [html][13-transformers]   | [pdf][13-trans-B]    | [code][lec_6_3]  | 
 | *6/5*      | Property-based Testing          | [html][14-testing]        |                      |                  | 
+
 |            | List Monad                      | [html][10-list]           |                      |                  |
 |            | Concurrency                     |                           |                      |                  |
 |            | Refinement Types                |                           |                      |                  |          
