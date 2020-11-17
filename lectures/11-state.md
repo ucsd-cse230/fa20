@@ -4,6 +4,25 @@ date: 2019-06-5
 headerImg: books.jpg
 --- 
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 ## A Tree Datatype
 
