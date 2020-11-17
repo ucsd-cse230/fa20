@@ -26,14 +26,10 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][lec_11_5]  |
 | *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][lec_11_10] | 
 | *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][lec_11_12] | 
-| *11/17*    | State Transformers              | [html][11-state]          |     		  |                   |
+| *11/17*    | State Transformers              | [html][11-state]          |     		  | [code][lec_11_17] |
+| *11/19*    | Parser Combinators              | [html][12-parsers]        |     		  | [code][lec_11_19] |
 
 <!-- 
-| *5/8*      | ""                              |                           | [pdf][08-classes-B]  | [code][lec_5_8]  |
-| *5/13*     | ""                              |                           |                      | [code][lec_5_13] |
-| *5/15*     | State Transformers              | [html][11-state]          | [pdf][11-state-A]    | [code][lec_5_15] |
-| *5/18*     | ""		                       |                           | [pdf][11-state-C]    | [code][lec_5_18] |
-| *5/20*     | ""			                   |                           | [pdf][11-state-C]    | [code][lec_5_20] |
 | *5/22*     | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][lec_5_22] |
 | *5/27*     | ""                              |                           |                      | [code][lec_5_27] | 
 | *5/29*     | ""                              |                           | [pdf][12-parsers-B]  | [code][lec_5_29] | 
@@ -72,6 +68,13 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [lec_10_29]: static/code/src/lec_10_29_20.hs
 [lec_11_3]: static/code/src/lec_11_3_20.hs
 [lec_11_5]: static/code/src/lec_11_5_20.hs
+[lec_11_10]: static/code/src/lec_11_10_20.hs
+[lec_11_12]: static/code/src/lec_11_12_20.hs
+[lec_11_17]: static/code/src/lec_11_17_20.hs
+[lec_11_19]: static/code/src/lec_11_19_20.hs
+[lec_11_24]: static/code/src/lec_11_17_24.hs
+
+
 
 [04-hs-io-A]: static/raw/04-hs-io-A.pdf
 
