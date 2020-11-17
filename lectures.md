@@ -17,17 +17,17 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *10/6*     | Lambda Calculus                 | [html][01-lambda]         | [pdf][01-lambda-B]   |                   | 
 | *10/8*     | ""                              |                           | [pdf][01-lambda-C]   |                   | 
 | *10/13*    | ""                              |                           | [pdf][01-lambda-D]   |                   | 
-| *10/15*    | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][lec_10_15] |
-| *10/20*    | ""                              |                           | [pdf][02-hs-basic-B] | [code][lec_10_20] |
-| *10/22*    | Haskell  Types                  | [html][03-hs-types]       | [pdf][03-hs-types-A] | [code][lec_10_22] |  
-| *10/27*    | Polymorphism & HOFs             | [html][06-poly-data]      | [pdf][06-poly-hof]   | [code][lec_10_27] |
-| *10/29*    | ""                              | [html][07-patterns]       | [pdf][07-hofs]       | [code][lec_10_29] |
-| *11/3*     | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][lec_11_3]  |
-| *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][lec_11_5]  |
-| *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][lec_11_10] | 
-| *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][lec_11_12] | 
-| *11/17*    | State Transformers              | [html][11-state]          |     		  | [code][lec_11_17] |
-| *11/19*    | Parser Combinators              | [html][12-parsers]        |     		  | [code][lec_11_19] |
+| *10/15*    | Haskell Basics                  | [html][02-hs-basic]       | [pdf][02-hs-basic-A] | [code][code]      |
+| *10/20*    | ""                              |                           | [pdf][02-hs-basic-B] | [code][code]      |
+| *10/22*    | Haskell  Types                  | [html][03-hs-types]       | [pdf][03-hs-types-A] | [code][code]      |  
+| *10/27*    | Polymorphism & HOFs             | [html][06-poly-data]      | [pdf][06-poly-hof]   | [code][code]      |
+| *10/29*    | ""                              | [html][07-patterns]       | [pdf][07-hofs]       | [code][code]      |
+| *11/3*     | Haskell: IO                     | [html][04-hs-io]          | ""                   | [code][code]      |
+| *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][code]      |
+| *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][code]      | 
+| *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][code]      | 
+| *11/17*    | State Transformers              | [html][11-state]          |     		              | [code][code]      |
+| *11/19*    | Parser Combinators              | [html][12-parsers]        |     		              | [code][code]      |
 
 <!-- 
 | *5/22*     | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][lec_5_22] |
