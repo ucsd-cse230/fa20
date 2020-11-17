@@ -320,15 +320,15 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="executing-transformers">Executing Transformers</h2>
 <p>Lets write a function to <em>evaluate</em> an <code class="sourceCode haskell"><span class="dt">ST</span> a</code></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="ot">evalState::</span> <span class="dt">State</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> a <span class="ot">-&gt;</span> a</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>evalState<span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">State</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>evalState <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="quiz">QUIZ</h2>
 <p>What is the value of <code class="sourceCode haskell">quiz</code> ?</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="ot">st ::</span> <span class="dt">St</span> [<span class="dt">Int</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>st <span class="ot">=</span> <span class="dt">STC</span> (\n <span class="ot">-&gt;</span> (n<span class="op">+</span><span class="dv">3</span>, [n, n<span class="op">+</span><span class="dv">1</span>, n<span class="op">+</span><span class="dv">2</span>]))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState100 st</span></code></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState <span class="dv">100</span> st</span></code></pre></div>
 <p><strong>A.</strong> <code class="sourceCode haskell"><span class="dv">103</span></code></p>
 <p><strong>B.</strong> <code class="sourceCode haskell">[<span class="dv">100</span>, <span class="dv">101</span>, <span class="dv">102</span>]</code></p>
 <p><strong>C.</strong> <code class="sourceCode haskell">(<span class="dv">103</span>, [<span class="dv">100</span>, <span class="dv">101</span>, <span class="dv">102</span>])</code></p>
@@ -365,13 +365,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a><span class="ot">bindST ::</span> <span class="dt">ST</span> a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">ST</span> b) <span class="ot">-&gt;</span> <span class="dt">ST</span> b</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>bindST <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
-<h2 id="what-is-returnst-doing-1">What is <code class="sourceCode haskell">returnST</code> <em>doing</em> ?</h2>
-<p><code class="sourceCode haskell">returnST v</code> is a <em>state transformer</em> that … ???</p>
-<p><br> <br> <br></p>
-<p>(Can someone suggest an explanation in English?)</p>
-<p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
-<h2 id="what-is-returnst-doing-2">What is <code class="sourceCode haskell">returnST</code> <em>doing</em> ?</h2>
-<p><code class="sourceCode haskell">returnST v</code> is a <em>state transformer</em> that … ???</p>
+<h2 id="what-is-bindst-doing">What is <code class="sourceCode haskell">bindST</code> <em>doing</em> ?</h2>
+<p><code class="sourceCode haskell">bindST v</code> is a <em>state transformer</em> that … ???</p>
 <p><br> <br> <br></p>
 <p>(Can someone suggest an explanation in English?)</p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
@@ -448,7 +443,6 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="example">Example</h2>
 <p><img src="../static/img/bind-1.png" /></p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
-<h2 id="riyadh-moosa">Riyadh Moosa</h2>
 <h2 id="example-1">Example</h2>
 <p><img src="../static/img/bind-2.png" /></p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
@@ -470,7 +464,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><code class="sourceCode haskell"><span class="op">&gt;&gt;=</span></code> lets us <em>chain</em> transformers into <em>one</em> big transformer!</p>
 <p>So we can define a function to <em>increment the counter by 3</em></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="co">-- Increment the counter by 3</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>, <span class="dt">Int</span>]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a>next3 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n1 <span class="ot">-&gt;</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>          next <span class="op">&gt;&gt;=</span> \n2 <span class="ot">-&gt;</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true"></a>            next <span class="op">&gt;&gt;=</span> \n3 <span class="ot">-&gt;</span></span>

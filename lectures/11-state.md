@@ -205,8 +205,8 @@ A *state transformer* is a function that
 Lets write a function to _evaluate_ an `ST a`
 
 ```haskell
-evalState:: State -> ST a -> a
-evalState= ???
+evalState :: State -> ST a -> a
+evalState = ???
 ```
 
 <br>
@@ -226,7 +226,7 @@ What is the value of `quiz` ?
 st :: St [Int]
 st = STC (\n -> (n+3, [n, n+1, n+2]))
 
-quiz = evalState100 st
+quiz = evalState 100 st
 ```
 
 **A.** `103`
@@ -343,32 +343,9 @@ bindST = ???
 <br>
 <br>
 
-## What is `returnST` *doing* ? 
+## What is `bindST` *doing* ? 
 
-`returnST v` is a *state transformer* that ... ???
-
-<br>
-<br>
-<br>
-
-(Can someone suggest an explanation in English?)
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-## What is `returnST` *doing* ? 
-
-`returnST v` is a *state transformer* that ... ???
+`bindST v` is a *state transformer* that ... ???
 
 <br>
 <br>
@@ -569,9 +546,6 @@ quiz = evalState 100 wtf1
 <br>
 <br>
 
-Riyadh Moosa 
--
-
 
 ## Example
 
@@ -641,7 +615,7 @@ So we can define a function to _increment the counter by 3_
 
 ```haskell
 -- Increment the counter by 3
-next3 :: ST [Int, Int]
+next3 :: ST [Int]
 next3 = next >>= \n1 ->
           next >>= \n2 ->
             next >>= \n3 ->
