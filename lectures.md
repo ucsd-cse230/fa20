@@ -48,6 +48,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 
 -->
 
+[TBD]: TBD
 [code]: https://github.com/ucsd-cse230/fa20/tree/master/static/code/src
 [00-intro]: static/raw/lec-intro.pdf
 [01-lambda]: lectures/01-lambda.html
