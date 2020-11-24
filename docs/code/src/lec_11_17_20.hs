@@ -113,7 +113,7 @@ test f t = fmap f t
 -- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('c',2)) (Leaf ('a',3)))
 
 -- >>> labelT charT
--- Node (Node (Leaf ('a',0)) (Leaf ('b',1))) (Node (Leaf ('c',2)) (Leaf ('a',3)))
+-- Node (Node (Leaf ('a',1000)) (Leaf ('b',1001))) (Node (Leaf ('c',1002)) (Leaf ('a',1003)))
 
 labelT t = evalState 1000 (helperT t)
 
@@ -127,8 +127,6 @@ helperT (Node l r) = do
   l' <- helperT l
   r' <- helperT r
   return (Node l' r')
-
-
 
 helper :: Int -> Tree a -> (Int, Tree (a, Int))
 helper n (Leaf x)   = (n + 1, Leaf (x, n))

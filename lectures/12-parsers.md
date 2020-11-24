@@ -273,9 +273,9 @@ Given the definition
 data Parser a = P (String -> [(a, String)])
 ```
 
-Which of the following is a valid `Parser Char`
+Which of the following is a valid `oneChar :: Parser Char`
 
-- that returns the **first** `Char` from a string (if one exists)
+that returns the **first** `Char` from a string (if one exists)
 
 ```haskell
 -- A
@@ -283,8 +283,8 @@ oneChar = P (\cs -> head cs)
 
 -- B
 oneChar = P (\cs -> case cs of 
-                      []   -> [('', []) 
-                      c:cs -> (c, cs))
+                      []   -> [('', [])] 
+                      c:cs -> [c, cs])
 
 -- C
 oneChar = P (\cs -> (head cs, tail cs))

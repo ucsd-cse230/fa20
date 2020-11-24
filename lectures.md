@@ -26,12 +26,13 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/5*     | Typeclasses                     | [html][08-typeclasses]    | [pdf][08-classes]    | [code][code]      |
 | *11/10*    | Functors                        | [html][09-monads]         | [pdf][09-functors]   | [code][code]      | 
 | *11/12*    | Monads                          | ""                        | [pdf][10-monads]     | [code][code]      | 
-| *11/17*    | State Transformers              | [html][11-state]          | [TBD][11-state-A]    | [TBD][code]       |
-| ""         | ""                              | ""                        | [TBD][11-state-B]    | [TBD][code]       |
-| *11/19*    | Parser Combinators              | [html][12-parsers]        | [TBD][TBD]           | [TBD][code]      |
-|            | Exceptions                      | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]       | 
-|            | Monad Transformers              | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]       | 
-|            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [TBD][TBD]       | 
+| *11/17*    | State Transformers              | [html][11-state]          | [pdf][11-state-A]    | [code][code]      |
+| ""         | ""                              | ""                        | [pdf][11-state-B]    | [code][code]      |
+| *11/19*    | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][code]      |
+| *11/24*    | ""                              | ""                        | ""                   | [code][code]      |
+|            | Exceptions                      | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
+|            | Monad Transformers              | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
+|            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [TBD][TBD]        | 
 
 
 <!-- 
@@ -91,8 +92,6 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [10-monads]: static/raw/10-monads-maybe.pdf
 [11-state-A]: static/raw/11-state-A.pdf
 [11-state-B]: static/raw/11-state-B.pdf
-[11-state-C]: static/raw/11-state-C.pdf
-
 [12-parsers-A]: static/raw/12-parsers-A.pdf
 [12-parsers-B]: static/raw/12-parsers-B.pdf
 [13-trans-A]: static/raw/13-transformers-A.pdf

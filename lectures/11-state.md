@@ -589,6 +589,15 @@ quiz = evalState 100 wtf1
 
 ## QUIZ 
 
+
+```haskell
+next :: ST String
+next = STC (\s -> (s+1, show s)
+
+evalState :: State -> ST a -> a
+evalState s (STC f) = snd (f s)
+```
+
 Consider a function `wtf2` defined as
 
 ```haskell

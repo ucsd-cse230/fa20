@@ -448,13 +448,18 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><img src="../static/img/bind-2.png" /></p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="quiz-3">QUIZ</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="ot">next ::</span> <span class="dt">ST</span> <span class="dt">String</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>next <span class="ot">=</span> <span class="dt">STC</span> (\s <span class="ot">-&gt;</span> (s<span class="op">+</span><span class="dv">1</span>, <span class="fu">show</span> s)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">State</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a>evalState s (<span class="dt">STC</span> f) <span class="ot">=</span> <span class="fu">snd</span> (f s)</span></code></pre></div>
 <p>Consider a function <code class="sourceCode haskell">wtf2</code> defined as</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>wtf2 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n1 <span class="ot">-&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a>         next <span class="op">&gt;&gt;=</span> \n2 <span class="ot">-&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a>           next <span class="op">&gt;&gt;=</span> \n3 <span class="ot">-&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>             <span class="fu">return</span> [n1, n2, n3]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>wtf2 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n1 <span class="ot">-&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a>         next <span class="op">&gt;&gt;=</span> \n2 <span class="ot">-&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a>           next <span class="op">&gt;&gt;=</span> \n3 <span class="ot">-&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>             <span class="fu">return</span> [n1, n2, n3]</span></code></pre></div>
 <p>What does <code class="sourceCode haskell">quiz</code> evaluate to?</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState <span class="dv">100</span> wtf</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>quiz <span class="ot">=</span> evalState <span class="dv">100</span> wtf</span></code></pre></div>
 <p><strong>A.</strong> Type Error!</p>
 <p><strong>B.</strong> [“100”, “100”, “100”]</p>
 <p><strong>C.</strong> [“0”, “0”, “0”]</p>
@@ -464,46 +469,46 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="chaining-transformers">Chaining Transformers</h2>
 <p><code class="sourceCode haskell"><span class="op">&gt;&gt;=</span></code> lets us <em>chain</em> transformers into <em>one</em> big transformer!</p>
 <p>So we can define a function to <em>increment the counter by 3</em></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="co">-- Increment the counter by 3</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a>next3 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n1 <span class="ot">-&gt;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>          next <span class="op">&gt;&gt;=</span> \n2 <span class="ot">-&gt;</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true"></a>            next <span class="op">&gt;&gt;=</span> \n3 <span class="ot">-&gt;</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true"></a>                <span class="fu">return</span> [n1,n2,n3]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="co">-- Increment the counter by 3</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>next3 <span class="ot">=</span> next <span class="op">&gt;&gt;=</span> \n1 <span class="ot">-&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>          next <span class="op">&gt;&gt;=</span> \n2 <span class="ot">-&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a>            next <span class="op">&gt;&gt;=</span> \n3 <span class="ot">-&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true"></a>                <span class="fu">return</span> [n1,n2,n3]</span></code></pre></div>
 <p>And then sequence it <em>twice</em> to get</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="ot">next6 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a>next6 <span class="ot">=</span> next3 <span class="op">&gt;&gt;=</span> \ns_1_2_3 <span class="ot">-&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>          next3 <span class="op">&gt;&gt;=</span> \ns_4_5_6 <span class="ot">-&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>            <span class="fu">return</span> (ns_123 <span class="op">++</span> ns_4_5_6)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="ot">next6 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a>next6 <span class="ot">=</span> next3 <span class="op">&gt;&gt;=</span> \ns_1_2_3 <span class="ot">-&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a>          next3 <span class="op">&gt;&gt;=</span> \ns_4_5_6 <span class="ot">-&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a>            <span class="fu">return</span> (ns_123 <span class="op">++</span> ns_4_5_6)</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="lets-do-the-above-examples">Lets <code class="sourceCode haskell"><span class="kw">do</span></code> the above examples</h2>
 <p>Remember, <code class="sourceCode haskell"><span class="kw">do</span></code> is just nice syntax for the above!</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="co">-- Increment the counter by 3</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>, <span class="dt">Int</span>]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a>next3 <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a>  n1 <span class="ot">&lt;-</span> next</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a>  n2 <span class="ot">&lt;-</span> next</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a>  n3 <span class="ot">&lt;-</span> next</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a>  <span class="fu">return</span> [n1,n2,n3]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="co">-- Increment the counter by 3</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a><span class="ot">next3 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>, <span class="dt">Int</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a>next3 <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a>  n1 <span class="ot">&lt;-</span> next</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a>  n2 <span class="ot">&lt;-</span> next</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a>  n3 <span class="ot">&lt;-</span> next</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a>  <span class="fu">return</span> [n1,n2,n3]</span></code></pre></div>
 <p>And then sequence it <em>twice</em> to get</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="ot">next6 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a>next6 <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a>  ns_123 <span class="ot">&lt;-</span> next3</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a>  ns_456 <span class="ot">&lt;-</span> next3</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a>  <span class="fu">return</span> (ns_123 <span class="op">++</span> ns_4_5_6)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="ot">next6 ::</span> <span class="dt">ST</span> [<span class="dt">Int</span>]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>next6 <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a>  ns_123 <span class="ot">&lt;-</span> next3</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a>  ns_456 <span class="ot">&lt;-</span> next3</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a>  <span class="fu">return</span> (ns_123 <span class="op">++</span> ns_4_5_6)</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="labeling-a-tree-with-a-global-counter">Labeling a Tree with a “Global Counter”</h2>
 <p>Lets <strong>rewrite</strong> our <code class="sourceCode haskell"><span class="dt">Tree</span></code> labeler with <code class="sourceCode haskell"><span class="dt">ST</span></code></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="ot">helperS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>helperS <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a><span class="ot">helperS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>helperS <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br></p>
 <h3 id="wow-compare-to-the-old-code">Wow, compare to the old code!</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a><span class="ot">helper ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>helper n (<span class="dt">Leaf</span> x)   <span class="ot">=</span> (n<span class="op">+</span><span class="dv">1</span>, <span class="dt">Leaf</span> (x, n))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>helper n (<span class="dt">Node</span> l r) <span class="ot">=</span> (n'', <span class="dt">Node</span> l' r')</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>  <span class="kw">where</span> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a>      (n', l')      <span class="ot">=</span> helper n l</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true"></a>      (n'', r')     <span class="ot">=</span> helper n' r</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="ot">helper ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>helper n (<span class="dt">Leaf</span> x)   <span class="ot">=</span> (n<span class="op">+</span><span class="dv">1</span>, <span class="dt">Leaf</span> (x, n))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a>helper n (<span class="dt">Node</span> l r) <span class="ot">=</span> (n'', <span class="dt">Node</span> l' r')</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a>  <span class="kw">where</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true"></a>      (n', l')      <span class="ot">=</span> helper n l</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true"></a>      (n'', r')     <span class="ot">=</span> helper n' r</span></code></pre></div>
 <p>Avoid worrying about propagating the “right” counters</p>
 <ul>
 <li>Automatically handled by <code class="sourceCode haskell"><span class="dt">ST</span></code> monad instance!</li>
@@ -511,25 +516,25 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="executing-the-transformer">Executing the Transformer</h2>
 <p>In the <strong>old</strong> code we <em>called</em> the helper with an <em>initial</em> counter <code class="sourceCode haskell"><span class="dv">0</span></code></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="ot">label ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> (a, <span class="dt">Int</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>label t       <span class="ot">=</span> t'</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a>  <span class="kw">where</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a>      (_, t') <span class="ot">=</span> helper <span class="dv">0</span> t</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="ot">label ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> (a, <span class="dt">Int</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>label t       <span class="ot">=</span> t'</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a>  <span class="kw">where</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a>      (_, t') <span class="ot">=</span> helper <span class="dv">0</span> t</span></code></pre></div>
 <p>In the <strong>new</strong> code what should we do?</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="ot">helperS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>helperS <span class="ot">=</span> <span class="op">...</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a><span class="ot">labelS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> (a, <span class="dt">Int</span>)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a>labelS <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="ot">helperS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (a, <span class="dt">Int</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a>helperS <span class="ot">=</span> <span class="op">...</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true"></a><span class="ot">labelS ::</span> <span class="dt">Tree</span> a <span class="ot">-&gt;</span> <span class="dt">Tree</span> (a, <span class="dt">Int</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true"></a>labelS <span class="ot">=</span> <span class="op">???</span></span></code></pre></div>
 <p>Now, we should be able to <code class="sourceCode haskell">exec</code> the <code class="sourceCode haskell">labelS</code> transformer</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> labelS (<span class="dt">Node</span> (<span class="dt">Node</span> (<span class="dt">Leaf</span> <span class="ch">'a'</span>) (<span class="dt">Leaf</span> <span class="ch">'b'</span>)) (<span class="dt">Leaf</span> <span class="ch">'c'</span>))</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a>(<span class="dt">Node</span> (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">1</span>))) (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">2</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> labelS (<span class="dt">Node</span> (<span class="dt">Node</span> (<span class="dt">Leaf</span> <span class="ch">'a'</span>) (<span class="dt">Leaf</span> <span class="ch">'b'</span>)) (<span class="dt">Leaf</span> <span class="ch">'c'</span>))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a>(<span class="dt">Node</span> (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">1</span>))) (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">2</span>)))</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="how-to-implement-keylabel">How to implement <code class="sourceCode haskell">keyLabel</code>?</h2>
 <p>So far, we <em>hardwired</em> an <code class="sourceCode haskell"><span class="dt">Int</span></code> counter as our <code class="sourceCode haskell"><span class="dt">State</span></code></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">State</span> <span class="ot">=</span> <span class="dt">Int</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">ST</span> a  <span class="ot">=</span> <span class="dt">STC</span> (<span class="dt">State</span> <span class="ot">-&gt;</span> (<span class="dt">State</span>, a))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">State</span> <span class="ot">=</span> <span class="dt">Int</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">ST</span> a  <span class="ot">=</span> <span class="dt">STC</span> (<span class="dt">State</span> <span class="ot">-&gt;</span> (<span class="dt">State</span>, a))</span></code></pre></div>
 <p>Have to <em>reimplement</em> the monad if we want a <em>different</em> state?</p>
 <ul>
 <li>e.g. <code class="sourceCode haskell"><span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span></code> to implement <code class="sourceCode haskell">keyLabel</code></li>
@@ -543,7 +548,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><p>Instantiate <code class="sourceCode haskell">a</code> to get <code class="sourceCode haskell">[<span class="dt">Int</span>]</code> and <code class="sourceCode haskell">[<span class="dt">Char</span>]</code></p></li>
 </ul>
 <p>Similarly, reuse <code class="sourceCode haskell"><span class="dt">ST</span></code> with a <strong>type</strong> parameter!</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">ST</span> s a <span class="ot">=</span> <span class="dt">STC</span> (s <span class="ot">-&gt;</span> (s, a))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">ST</span> s a <span class="ot">=</span> <span class="dt">STC</span> (s <span class="ot">-&gt;</span> (s, a))</span></code></pre></div>
 <ul>
 <li><strong>State</strong> is represented by type <code class="sourceCode haskell">s</code></li>
 <li><strong>Return Value</strong> is the type <code class="sourceCode haskell">a</code> (as before).</li>
@@ -551,73 +556,73 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="a-generic-state-transformer-monad">A Generic State Transformer Monad</h2>
 <p>Lets make the above a(n instance of) <code class="sourceCode haskell"><span class="dt">Monad</span></code></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">Monad</span> (<span class="dt">ST</span> s) <span class="kw">where</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>  <span class="co">-- return :: a -&gt; ST s a</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>  <span class="fu">return</span> val <span class="ot">=</span> <span class="dt">ST0C</span> (\s <span class="ot">-&gt;</span> (s, val)) </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true"></a>  <span class="co">-- (&gt;&gt;=) :: ST s a -&gt; (a -&gt; ST s b) -&gt; ST s b</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true"></a>  (<span class="op">&gt;&gt;=</span>) sta f <span class="ot">=</span> <span class="dt">ST0C</span> (\s <span class="ot">-&gt;</span> </span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true"></a>                       <span class="kw">let</span> (s', va)  <span class="ot">=</span> runState sta s </span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true"></a>                           stb       <span class="ot">=</span> f va</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true"></a>                           (s'', vb) <span class="ot">=</span> runState stb s'</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true"></a>                       <span class="kw">in</span> </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true"></a>                           (s'', vb)</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true"></a>                     )</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true"></a></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true"></a><span class="ot">runState ::</span> <span class="dt">ST</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> (s, a)</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true"></a>runState (<span class="dt">STC</span> f) s <span class="ot">=</span> f s</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true"></a></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">ST</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true"></a>evalState st s <span class="ot">=</span> <span class="fu">snd</span> (runState st s) </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="kw">instance</span> <span class="dt">Monad</span> (<span class="dt">ST</span> s) <span class="kw">where</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a>  <span class="co">-- return :: a -&gt; ST s a</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>  <span class="fu">return</span> val <span class="ot">=</span> <span class="dt">ST0C</span> (\s <span class="ot">-&gt;</span> (s, val)) </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true"></a>  <span class="co">-- (&gt;&gt;=) :: ST s a -&gt; (a -&gt; ST s b) -&gt; ST s b</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true"></a>  (<span class="op">&gt;&gt;=</span>) sta f <span class="ot">=</span> <span class="dt">ST0C</span> (\s <span class="ot">-&gt;</span> </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true"></a>                       <span class="kw">let</span> (s', va)  <span class="ot">=</span> runState sta s </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true"></a>                           stb       <span class="ot">=</span> f va</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true"></a>                           (s'', vb) <span class="ot">=</span> runState stb s'</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true"></a>                       <span class="kw">in</span> </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true"></a>                           (s'', vb)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true"></a>                     )</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true"></a></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true"></a><span class="ot">runState ::</span> <span class="dt">ST</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> (s, a)</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true"></a>runState (<span class="dt">STC</span> f) s <span class="ot">=</span> f s</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true"></a></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">ST</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true"></a>evalState st s <span class="ot">=</span> <span class="fu">snd</span> (runState st s) </span></code></pre></div>
 <p>(<strong>exactly</strong> the same code as <code class="sourceCode haskell">returnST</code> and <code class="sourceCode haskell">bindST</code>)</p>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="lets-implement-keylabel">Lets implement <code class="sourceCode haskell">keyLabel</code></h2>
 <ol type="1">
 <li>Define a <code class="sourceCode haskell"><span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span></code> state-transformer</li>
 </ol>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">CharST</span> a <span class="ot">=</span> <span class="dt">ST</span> (<span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span>) a</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">CharST</span> a <span class="ot">=</span> <span class="dt">ST</span> (<span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span>) a</span></code></pre></div>
 <ol start="2" type="1">
 <li>Modify <code class="sourceCode haskell">next</code> to take a <code class="sourceCode haskell"><span class="dt">Char</span></code></li>
 </ol>
-<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a><span class="ot">charNext ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">CharST</span> <span class="dt">Int</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a>charNext c <span class="ot">=</span> <span class="dt">STC</span> (\m <span class="ot">-&gt;</span> </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a>    <span class="kw">let</span> </span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a>        n  <span class="ot">=</span> M.findWithDefault <span class="dv">0</span> c m    <span class="co">-- label for 'c' </span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a>        m' <span class="ot">=</span> M.insert c (n<span class="op">+</span><span class="dv">1</span>) m         <span class="co">-- update map</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true"></a>    <span class="kw">in</span> </span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true"></a>        (m', n)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="ot">charNext ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">CharST</span> <span class="dt">Int</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a>charNext c <span class="ot">=</span> <span class="dt">STC</span> (\m <span class="ot">-&gt;</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>    <span class="kw">let</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a>        n  <span class="ot">=</span> M.findWithDefault <span class="dv">0</span> c m    <span class="co">-- label for 'c' </span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true"></a>        m' <span class="ot">=</span> M.insert c (n<span class="op">+</span><span class="dv">1</span>) m         <span class="co">-- update map</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true"></a>    <span class="kw">in</span> </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true"></a>        (m', n)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true"></a>    )</span></code></pre></div>
 <ol start="3" type="1">
 <li>Modify <code class="sourceCode haskell">helper</code> to use <code class="sourceCode haskell">charNext</code></li>
 </ol>
-<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="ot">keyHelperS ::</span> <span class="dt">Tree</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (<span class="dt">Char</span>, <span class="dt">Int</span>))</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a>keyHelperS (<span class="dt">Leaf</span> c) <span class="ot">=</span> <span class="kw">do</span> </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>    n <span class="ot">&lt;-</span> charNext c</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a>    <span class="fu">return</span> (<span class="dt">Leaf</span> (c, n))</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true"></a>keyHelperS (<span class="dt">Node</span> l r) <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true"></a>    l' <span class="ot">&lt;-</span> keyHelperS l</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true"></a>    r' <span class="ot">&lt;-</span> keyHelperS r</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true"></a>    <span class="fu">return</span> (<span class="dt">Tree</span> l' r')</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true"></a></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true"></a><span class="ot">keyLabelS ::</span> <span class="dt">Tree</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Tree</span> (<span class="dt">Char</span>, <span class="dt">Int</span>)</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true"></a>keyLabelS t <span class="ot">=</span> evalState (keyHelperS t) empty </span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="ot">keyHelperS ::</span> <span class="dt">Tree</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Tree</span> (<span class="dt">Char</span>, <span class="dt">Int</span>))</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a>keyHelperS (<span class="dt">Leaf</span> c) <span class="ot">=</span> <span class="kw">do</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a>    n <span class="ot">&lt;-</span> charNext c</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a>    <span class="fu">return</span> (<span class="dt">Leaf</span> (c, n))</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true"></a>keyHelperS (<span class="dt">Node</span> l r) <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true"></a>    l' <span class="ot">&lt;-</span> keyHelperS l</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true"></a>    r' <span class="ot">&lt;-</span> keyHelperS r</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true"></a>    <span class="fu">return</span> (<span class="dt">Tree</span> l' r')</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true"></a></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true"></a><span class="ot">keyLabelS ::</span> <span class="dt">Tree</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">Tree</span> (<span class="dt">Char</span>, <span class="dt">Int</span>)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true"></a>keyLabelS t <span class="ot">=</span> evalState (keyHelperS t) empty </span></code></pre></div>
 <p>Lets make sure it works!</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> keyLabelS charT</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a><span class="dt">Node</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">0</span>))) </span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> keyLabelS charT</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a><span class="dt">Node</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">0</span>))) </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">1</span>)))</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="lets-look-at-the-final-state">Lets look at the final “state”</h2>
-<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> (final, t) <span class="ot">=</span> runState (keyHelper charT) M.empty</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> (final, t) <span class="ot">=</span> runState (keyHelper charT) M.empty</span></code></pre></div>
 <p>The returned <code class="sourceCode haskell"><span class="dt">Tree</span></code> is</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> t</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true"></a><span class="dt">Node</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">0</span>))) </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> t</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true"></a><span class="dt">Node</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'b'</span>, <span class="dv">0</span>))) </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true"></a>    (<span class="dt">Node</span> (<span class="dt">Leaf</span> (<span class="ch">'c'</span>, <span class="dv">0</span>)) (<span class="dt">Leaf</span> (<span class="ch">'a'</span>, <span class="dv">1</span>)))</span></code></pre></div>
 <p>and the final <code class="sourceCode haskell"><span class="dt">State</span></code> is</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> final</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true"></a>fromList [(<span class="ch">'a'</span>,<span class="dv">2</span>),(<span class="ch">'b'</span>,<span class="dv">1</span>),(<span class="ch">'c'</span>,<span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true"></a><span class="op">&gt;&gt;&gt;</span> final</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true"></a>fromList [(<span class="ch">'a'</span>,<span class="dv">2</span>),(<span class="ch">'b'</span>,<span class="dv">1</span>),(<span class="ch">'c'</span>,<span class="dv">1</span>)]</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="generically-getting-and-setting-state">Generically Getting and Setting State</h2>
 <p>As <em>State</em> is “generic”</p>
@@ -628,39 +633,39 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <ul>
 <li>that <em>read</em> and <em>update</em> the state</li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true"></a><span class="co">-- | `get` leaves state unchanged &amp; returns it as value</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true"></a><span class="ot">get ::</span> <span class="dt">ST</span> s s</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true"></a><span class="co">-- | `set s` changes the state to `s` &amp; returns () as a value</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true"></a><span class="ot">put ::</span> s <span class="ot">-&gt;</span> <span class="dt">ST</span> s ()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a><span class="co">-- | `get` leaves state unchanged &amp; returns it as value</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a><span class="ot">get ::</span> <span class="dt">ST</span> s s</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true"></a><span class="co">-- | `set s` changes the state to `s` &amp; returns () as a value</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true"></a><span class="ot">put ::</span> s <span class="ot">-&gt;</span> <span class="dt">ST</span> s ()</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="exercise-1">EXERCISE</h2>
 <p>Can you fill in the implementations of <code class="sourceCode haskell">get</code> and <code class="sourceCode haskell">set</code> ?</p>
 <p><strong>HINT</strong> Just follow the types…</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a><span class="co">-- | `get` leaves state unchanged &amp; returns it as value</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a><span class="ot">get ::</span> <span class="dt">ST</span> s s</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a>get <span class="ot">=</span> <span class="dt">STC</span> (\oldState <span class="ot">-&gt;</span> <span class="op">???</span>) </span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true"></a></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true"></a><span class="co">-- | `put s` changes the state to `s` &amp; returns () as a value</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true"></a><span class="ot">put ::</span> s <span class="ot">-&gt;</span> <span class="dt">ST</span> s ()</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true"></a>put s <span class="ot">=</span> <span class="dt">STC</span> (\oldState <span class="ot">-&gt;</span> <span class="op">???</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true"></a><span class="co">-- | `get` leaves state unchanged &amp; returns it as value</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true"></a><span class="ot">get ::</span> <span class="dt">ST</span> s s</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true"></a>get <span class="ot">=</span> <span class="dt">STC</span> (\oldState <span class="ot">-&gt;</span> <span class="op">???</span>) </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true"></a><span class="co">-- | `put s` changes the state to `s` &amp; returns () as a value</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true"></a><span class="ot">put ::</span> s <span class="ot">-&gt;</span> <span class="dt">ST</span> s ()</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true"></a>put s <span class="ot">=</span> <span class="dt">STC</span> (\oldState <span class="ot">-&gt;</span> <span class="op">???</span>)</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="using-get-and-put-global-counter">Using <code class="sourceCode haskell">get</code> and <code class="sourceCode haskell">put</code> : Global Counter</h2>
 <p>We can now implement the plain <em>global counter</em> <code class="sourceCode haskell">next</code> as</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true"></a><span class="ot">next ::</span> <span class="dt">ST</span> <span class="dt">Int</span> <span class="dt">Int</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true"></a>next <span class="ot">=</span> <span class="kw">do</span> </span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true"></a>    n <span class="ot">&lt;-</span> get     <span class="co">-- save the current counter as 'n'</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true"></a>    put (n<span class="op">+</span><span class="dv">1</span>)    <span class="co">-- update the counter to 'n+1'</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true"></a>    <span class="fu">return</span> n     <span class="co">-- return the old counter</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="ot">next ::</span> <span class="dt">ST</span> <span class="dt">Int</span> <span class="dt">Int</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true"></a>next <span class="ot">=</span> <span class="kw">do</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true"></a>    n <span class="ot">&lt;-</span> get     <span class="co">-- save the current counter as 'n'</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true"></a>    put (n<span class="op">+</span><span class="dv">1</span>)    <span class="co">-- update the counter to 'n+1'</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true"></a>    <span class="fu">return</span> n     <span class="co">-- return the old counter</span></span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="using-get-and-put-frequency-map">Using <code class="sourceCode haskell">get</code> and <code class="sourceCode haskell">put</code> : Frequency Map</h2>
 <p>Lets implement the <em>char-frequency counter</em> <code class="sourceCode haskell">charNext</code> as</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="ot">charNext ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span>) <span class="dt">Int</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true"></a>charNext c <span class="ot">=</span> <span class="kw">do</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true"></a>  m    <span class="ot">&lt;-</span> get                      <span class="co">-- get current freq-map</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true"></a>  <span class="kw">let</span> n <span class="ot">=</span> M.findWithDefault <span class="dv">0</span> c m  <span class="co">-- current freq for c (or 0)</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true"></a>  put (M.insert c (n<span class="op">+</span><span class="dv">1</span>) m)         <span class="co">-- update freq for c</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true"></a>  <span class="fu">return</span> n                         <span class="co">-- return current as value</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true"></a><span class="ot">charNext ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">ST</span> (<span class="dt">Map</span> <span class="dt">Char</span> <span class="dt">Int</span>) <span class="dt">Int</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true"></a>charNext c <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true"></a>  m    <span class="ot">&lt;-</span> get                      <span class="co">-- get current freq-map</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true"></a>  <span class="kw">let</span> n <span class="ot">=</span> M.findWithDefault <span class="dv">0</span> c m  <span class="co">-- current freq for c (or 0)</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true"></a>  put (M.insert c (n<span class="op">+</span><span class="dv">1</span>) m)         <span class="co">-- update freq for c</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true"></a>  <span class="fu">return</span> n                         <span class="co">-- return current as value</span></span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="section"></h2>
 <h2 id="a-state-transformer-library">A State-Transformer Library</h2>
@@ -670,14 +675,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><p>hides the implementation of the transformer</p></li>
 </ul>
 <p>Clients can <strong>only</strong> use the “public” API</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true"></a><span class="co">-- | Like 'ST s a' but &quot;private&quot;, cannot be directly accessed</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">State</span> s a </span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true"></a><span class="co">-- | Like the synonyms described above</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true"></a><span class="ot">get       ::</span> <span class="dt">State</span> s s </span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true"></a><span class="ot">put       ::</span> s <span class="ot">-&gt;</span> <span class="dt">State</span> s () </span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true"></a><span class="ot">runState  ::</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> (a, s)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a><span class="co">-- | Like 'ST s a' but &quot;private&quot;, cannot be directly accessed</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">State</span> s a </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true"></a><span class="co">-- | Like the synonyms described above</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true"></a><span class="ot">get       ::</span> <span class="dt">State</span> s s </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true"></a><span class="ot">put       ::</span> s <span class="ot">-&gt;</span> <span class="dt">State</span> s () </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true"></a><span class="ot">runState  ::</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> (a, s)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true"></a><span class="ot">evalState ::</span> <span class="dt">State</span> s a <span class="ot">-&gt;</span> s <span class="ot">-&gt;</span> a</span></code></pre></div>
 <p>Your homework will give you practice with using these</p>
 <ul>
 <li>to do <em>imperative functional programming</em></li>
@@ -690,28 +695,28 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>But may also perform some input/output</li>
 </ul>
 <p>A number of primitives are provided for building <code class="sourceCode haskell"><span class="dt">IO</span></code> recipes</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a><span class="co">-- IO is a monad</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true"></a><span class="fu">return</span><span class="ot">  ::</span> a <span class="ot">-&gt;</span> <span class="dt">IO</span> a</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true"></a><span class="ot">(&gt;&gt;=)   ::</span> <span class="dt">IO</span> a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">IO</span> b) <span class="ot">-&gt;</span> <span class="dt">IO</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true"></a><span class="co">-- IO is a monad</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true"></a><span class="fu">return</span><span class="ot">  ::</span> a <span class="ot">-&gt;</span> <span class="dt">IO</span> a</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true"></a><span class="ot">(&gt;&gt;=)   ::</span> <span class="dt">IO</span> a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">IO</span> b) <span class="ot">-&gt;</span> <span class="dt">IO</span> b</span></code></pre></div>
 <p>Basic actions that can be “chained” via <code class="sourceCode haskell"><span class="op">&gt;&gt;=</span></code> etc.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true"></a><span class="fu">getChar</span><span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Char</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true"></a><span class="fu">putChar</span><span class="ot"> ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a><span class="fu">getChar</span><span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">Char</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a><span class="fu">putChar</span><span class="ot"> ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> ()</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="a-recipe-to-read-a-line-from-the-keyboard">A Recipe to Read a Line from the Keyboard</h2>
-<div class="sourceCode" id="cb53"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a><span class="fu">getLine</span><span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">String</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a><span class="fu">getLine</span> <span class="ot">=</span>  <span class="kw">do</span> </span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true"></a>  x <span class="ot">&lt;-</span> <span class="fu">getChar</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true"></a>  <span class="kw">if</span> x <span class="op">==</span> <span class="ch">'\n'</span> <span class="kw">then</span> </span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true"></a>      <span class="fu">return</span> []</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true"></a>  <span class="kw">else</span> <span class="kw">do</span> </span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true"></a>      xs <span class="ot">&lt;-</span> <span class="fu">getLine</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true"></a>      <span class="fu">return</span> (x<span class="op">:</span>xs)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true"></a><span class="fu">getLine</span><span class="ot"> ::</span> <span class="dt">IO</span> <span class="dt">String</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true"></a><span class="fu">getLine</span> <span class="ot">=</span>  <span class="kw">do</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true"></a>  x <span class="ot">&lt;-</span> <span class="fu">getChar</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true"></a>  <span class="kw">if</span> x <span class="op">==</span> <span class="ch">'\n'</span> <span class="kw">then</span> </span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true"></a>      <span class="fu">return</span> []</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true"></a>  <span class="kw">else</span> <span class="kw">do</span> </span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true"></a>      xs <span class="ot">&lt;-</span> <span class="fu">getLine</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true"></a>      <span class="fu">return</span> (x<span class="op">:</span>xs)</span></code></pre></div>
 <p><br> <br> <br> <br> <br> <br> <br> <br></p>
 <h2 id="io-is-a-special-case-of-the-state-transformer">IO is a “special case” of the State-Transformer</h2>
 <p>The internal state is a representation of the <strong>state of the world</strong></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">World</span> <span class="co">-- machine, files, network, internet ... </span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">IO</span> a  <span class="ot">=</span> <span class="dt">World</span> <span class="ot">-&gt;</span> (<span class="dt">World</span>, a)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">World</span> <span class="co">-- machine, files, network, internet ... </span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true"></a><span class="kw">type</span> <span class="dt">IO</span> a  <span class="ot">=</span> <span class="dt">World</span> <span class="ot">-&gt;</span> (<span class="dt">World</span>, a)</span></code></pre></div>
 <p>A <code class="sourceCode haskell"><span class="dt">Recipe</span></code> is a function that</p>
 <ul>
 <li>takes the current <code class="sourceCode haskell"><span class="dt">World</span></code> as its argument</li>

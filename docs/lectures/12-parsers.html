@@ -354,17 +354,15 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="quiz">QUIZ</h2>
 <p>Given the definition</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">data</span> <span class="dt">Parser</span> a <span class="ot">=</span> <span class="dt">P</span> (<span class="dt">String</span> <span class="ot">-&gt;</span> [(a, <span class="dt">String</span>)])</span></code></pre></div>
-<p>Which of the following is a valid <code class="sourceCode haskell"><span class="dt">Parser</span> <span class="dt">Char</span></code></p>
-<ul>
-<li>that returns the <strong>first</strong> <code class="sourceCode haskell"><span class="dt">Char</span></code> from a string (if one exists)</li>
-</ul>
+<p>Which of the following is a valid <code class="sourceCode haskell"><span class="ot">oneChar ::</span> <span class="dt">Parser</span> <span class="dt">Char</span></code></p>
+<p>that returns the <strong>first</strong> <code class="sourceCode haskell"><span class="dt">Char</span></code> from a string (if one exists)</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="co">-- A</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>oneChar <span class="ot">=</span> <span class="dt">P</span> (\cs <span class="ot">-&gt;</span> <span class="fu">head</span> cs)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="co">-- B</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>oneChar <span class="ot">=</span> <span class="dt">P</span> (\cs <span class="ot">-&gt;</span> <span class="kw">case</span> cs <span class="kw">of</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>                      []   <span class="ot">-&gt;</span> [('', []) </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>                      c<span class="op">:</span>cs <span class="ot">-&gt;</span> (c, cs))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>                      []   <span class="ot">-&gt;</span> [('', [])] </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>                      c<span class="op">:</span>cs <span class="ot">-&gt;</span> [c, cs])</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a><span class="co">-- C</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>oneChar <span class="ot">=</span> <span class="dt">P</span> (\cs <span class="ot">-&gt;</span> (<span class="fu">head</span> cs, <span class="fu">tail</span> cs))</span>
