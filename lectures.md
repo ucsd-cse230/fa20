@@ -30,7 +30,8 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | ""         | ""                              | ""                        | [pdf][11-state-B]    | [code][code]      |
 | *11/19*    | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][code]      |
 | *11/24*    | ""                              | ""                        | ""                   | [code][code]      |
-|            | Exceptions                      | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
+| *12/1*     | ""                              | ""                        | ""                   | [code][code]      |
+| *12/3*     | Exceptions                      | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
 |            | Monad Transformers              | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
 |            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [TBD][TBD]        | 
 
