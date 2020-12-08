@@ -44,9 +44,9 @@ eval (Div   e1 e2) = do
   count "Div"
   if n2 /= 0 
     then return (n1 `div` n2) 
-    else throw e2
-eval (Def e n) =
-  tryCatch (eval e) (\_ -> return n) 
+    else throwError e2
+-- eval (Def e n) =
+--   tryCatch (eval e) (\_ -> return n) 
   -- tryCatchDefault (eval e) n
 
 
@@ -62,12 +62,12 @@ eCrash = (Div (Number 10) (Plus (Number 5) (Number (-5))))
 -- >>> eval (Def eCrash 99)
 -- Right 99 
 
+throwError :: e -> Either e a
+throwError err = Left err
 
-throw :: e -> Either e a
-throw err = Left err
-
-tryCatch :: Either e a -> (e -> Either e a) -> Either e a
-tryCatch expr handler = case expr of
+-- catchError :: m a ->     (e -> m a)        -> m a
+catchError :: Either e a -> (e -> Either e a) -> Either e a
+catchError expr handler = case expr of
   Right v  -> Right v
   Left exn -> handler exn
 
