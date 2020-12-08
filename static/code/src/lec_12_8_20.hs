@@ -1,149 +1,132 @@
+{-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE FlexibleInstances #-}
 
 module Lec_12_8_20 where
-
-import Prelude hiding (Either (..))
 import qualified Data.Map as M
 import Control.Monad.State
+import Control.Monad.Error
 
 data Expr
   = Number Int            -- ^ 0,1,2,3,4
   | Plus   Expr Expr      -- ^ e1 + e2
   | Div    Expr Expr      -- ^ e1 / e2
-  | Def    Expr Int       -- ^ Def e n returns the result of e if defined else `n`
+  | Def    Expr Int       -- ^ Def e n (try to eval e with exn return n) 
   deriving (Show)
 
 
--- data Result   a = Err String | Ok    a deriving (Show)
-data Either e a = Left e     | Right a deriving (Show) 
+-- eval :: Expr -> Profile Int 
+-- eval :: (MonadState Counter m) => Expr -> m Int
 
-type Result a = Either String a 
--- instance Monad Result where
---   return x      = Ok x
---   (Ok v)  >>= f = f v
---   (Err s) >>= _ = Err s
-
-instance Monad (Either e) where
-  return x        = Right x
-  (Right v) >>= f = f v
-  (Left s)  >>= _ = Left s
-
-
----eval :: Expr -> Either Expr Int 
+eval :: (MonadState Counter m, MonadError String m)=> Expr -> m Int
 eval (Number n)    = 
   return n
 eval (Plus  e1 e2) = do 
   n1 <- eval e1
   n2 <- eval e2
-  count "Add"
+  count "add"
   return (n1 + n2)
 eval (Div   e1 e2) = do 
   n1 <- eval e1 
   n2 <- eval e2 
-  count "Div"
   if n2 /= 0 
-    then return (n1 `div` n2) 
-    else throw e2
+    then do count "div"
+            return (n1 `div` n2) 
+    else throwError (show e2)
 eval (Def e n) =
-  tryCatch (eval e) (\_ -> return n) 
-  -- tryCatchDefault (eval e) n
+   catchError (eval e) (\_ -> return n) 
+
+-- count :: String -> Profile ()
+count :: (MonadState Counter m) => String -> m ()
+count op = do
+  m <- get 
+  let n = M.findWithDefault 0 op m
+  put (M.insert op (n+1) m)            
+
+-- type Profile a = State Counter a
+type Profile = StateT Counter Basic 
+
+type Exn = ErrorT Expr Basic 
+
+type ExnProf = ErrorT String (StateT Counter Basic) 
+
+type ProfExn = StateT Counter (ErrorT String Basic)
+
+runExnProf :: (Show a) => ExnProf a -> String
+runExnProf act = show thing3
+  where
+    thing1 = runErrorT act
+    thing2 = runStateT thing1
+    BasicWrapper thing3 = thing2 M.empty
+
+runProfExn :: (Show a) => ProfExn a -> String
+runProfExn = undefined
+
+-- >>> runExnProf (eval eCrash)
+-- "(Left \"Plus (Number 5) (Number (-5))\",fromList [(\"add\",1)])"
+
+-- "Result = ... , Ops = { "add" = 2, "div" = 1 }
+-- "Error  = ... , Ops = { ... }"
+
+
+-- runStateT :: StateT s m a -> s -> m (a, s)
+-- runErrorT :: ErrorT e m a -> m (Either e a) 
 
 
 
-tryCatchDefault :: Either e a -> a -> Either e a
-tryCatchDefault (Left _)    def = Right def
-tryCatchDefault (Right val) _   = Right val
+type Counter = M.Map String Int
 
-
-
-eCrash = (Div (Number 10) (Plus (Number 5) (Number (-5))))
-
--- >>> eval (Def eCrash 99)
--- Right 99 
+--- runProfile :: Profile a -> (a, Counter)
+-- runProfile act = undefined runStateT -- act M.empty
 
 
 throw :: e -> Either e a
 throw err = Left err
 
-tryCatch :: Either e a -> (e -> Either e a) -> Either e a
-tryCatch expr handler = case expr of
-  Right v  -> Right v
-  Left exn -> handler exn
 
 
+eCrash :: Expr
+eCrash = Div (Number 10) (Plus (Number 5) (Number (-5)))
 
+-- >>> eval (Def eCrash 99)
+-- Right 99 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-instance Applicative (Either e) where 
-instance Functor (Either e) where 
-
--- instance Applicative Result where 
--- instance Functor Result where 
-
--- Profile a = (Int -> (a, Int)
-
-type Profile a = State Counter a
-
--- data Counter = Counter { numAdd :: Int, numDiv :: Int } deriving (Show)
-type Counter = M.Map String Int
-
-
-evalP :: Expr -> Profile Int 
-evalP (Number n)    = 
-  return n
-evalP (Plus  e1 e2) = do 
-  n1 <- evalP e1
-  n2 <- evalP e2
-  count "Add"
-  return (n1 + n2)
-evalP (Div   e1 e2) = do 
-  n1 <- evalP e1 
-  n2 <- evalP e2 
-  count "Div"
-  return (n1 `div` n2)
-
-runProfile :: Profile a -> (a, Counter)
-runProfile act = runState act M.empty
-
-count :: String -> Profile ()
-count op = do
-  m <- get 
-  let n = M.findWithDefault 0 op m
-  put (M.insert op (n+1) m)
-
-
-
+goodExpr :: Expr
 goodExpr = Plus (Div (Number 100) (Number 10)) (Plus (Number 20) (Plus (Number 30) (Number 40)))
 
--- >>> runProfile (evalP goodExpr)
--- (100,fromList [("Add",3),("Div",1)])
+-- >>>  (eval eCrash)
 
-{- 
-
-  A. 99
-  B. (99, 0)
-  C. (0, 99)
-  D. (99, 99)
-  E. 0
-
--}
+-- >>> runExnProf (eval goodExpr)
 
 
--- eCrash = (Div (Number 10) (Plus (Number 5) (Number (-5))))
+data Basic a = BasicWrapper a
+
+instance Monad Basic where
+  -- return :: a -> Basic a
+  return a = BasicWrapper a 
+
+  -- (>>=)  :: Basic a -> (a -> Basic b) -> Basic b
+  (>>=) (BasicWrapper a) f = f a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+instance Applicative Basic where
+
+instance Functor Basic where
