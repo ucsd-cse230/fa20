@@ -31,9 +31,9 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 | *11/19*    | Parser Combinators              | [html][12-parsers]        | [pdf][12-parsers-A]  | [code][code]      |
 | *11/24*    | ""                              | ""                        | ""                   | [code][code]      |
 | *12/1*     | ""                              | ""                        | ""                   | [code][code]      |
-| *12/3*     | Exceptions                      | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
-|            | Monad Transformers              | [html][13-transformers]   | [TBD][TBD]           | [TBD][TBD]        | 
-|            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [TBD][TBD]        | 
+| *12/3*     | Exceptions                      | [html][13-transformers]   | [pdf][13-exceptions] | [code][code]      | 
+| *12/8*     | Monad Transformers              | [html][13-transformers]   | [TBD][TBD]           | [code][code]      | 
+|            | Property-based Testing          | [html][14-testing]        | [TBD][TBD]           | [code][code]      | 
 
 
 <!-- 
@@ -95,7 +95,7 @@ The lectures will be recorded and available on [CANVAS](https://canvas.ucsd.edu/
 [11-state-B]: static/raw/11-state-B.pdf
 [12-parsers-A]: static/raw/12-parsers-A.pdf
 [12-parsers-B]: static/raw/12-parsers-B.pdf
-[13-trans-A]: static/raw/13-transformers-A.pdf
+[13-exceptions]: static/raw/13-exceptions.pdf
 [13-trans-B]: static/raw/13-transformers-B.pdf
 [lec_5_22]: static/raw/lec_5_22_20.hs
 [lec_5_27]: static/raw/lec_5_27_20.hs
